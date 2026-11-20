@@ -1,0 +1,74 @@
+@baseUrl = http://localhost:5234
+@productId = 1
+
+### Listar productos
+GET {{baseUrl}}/v1/api/products
+
+### Buscar por nombre (contiene, sin distinguir mayusculas)
+GET {{baseUrl}}/v1/api/products?search=notebook
+
+### Obtener producto por id
+GET {{baseUrl}}/v1/api/products/{{productId}}
+
+### Crear producto (201)
+POST {{baseUrl}}/v1/api/products
+Content-Type: application/json
+
+{
+  "name": "Notebook ASUS Zenbook 14 OLED",
+  "description": "Intel Core Ultra 7, 16 GB RAM, SSD 1 TB, pantalla OLED 14\"",
+  "price": 1349.00,
+  "stock": 5
+}
+
+### Crear con nombre duplicado (400)
+POST {{baseUrl}}/v1/api/products
+Content-Type: application/json
+
+{
+  "name": "mouse logitech mx master 3s",
+  "description": "Duplicado a proposito",
+  "price": 99.99,
+  "stock": 1
+}
+
+### Crear con datos invalidos (400 formato)
+POST {{baseUrl}}/v1/api/products
+Content-Type: application/json
+
+{
+  "name": "",
+  "price": -10,
+  "stock": -1
+}
+
+### Reemplazar producto (PUT)
+PUT {{baseUrl}}/v1/api/products/{{productId}}
+Content-Type: application/json
+
+{
+  "name": "Notebook Lenovo ThinkPad T14 Gen 5",
+  "description": "Intel Core Ultra 7, 32 GB RAM, SSD 1 TB, pantalla 14\" 2.2K",
+  "price": 1799.00,
+  "stock": 11
+}
+
+### Modificar solo el stock (PATCH)
+PATCH {{baseUrl}}/v1/api/products/{{productId}}
+Content-Type: application/json
+
+{
+  "stock": 25
+}
+
+### PATCH sin campos (400)
+PATCH {{baseUrl}}/v1/api/products/{{productId}}
+Content-Type: application/json
+
+{}
+
+### Eliminar producto (204) - usar el id de un producto creado
+DELETE {{baseUrl}}/v1/api/products/21
+
+### Producto inexistente (404)
+GET {{baseUrl}}/v1/api/products/99999

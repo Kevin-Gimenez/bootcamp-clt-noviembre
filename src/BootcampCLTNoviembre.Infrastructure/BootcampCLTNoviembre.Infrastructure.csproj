@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Detalles tecnicos: EF Core + Npgsql (PostgreSQL). Implementa los puertos de Domain/Application. -->
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BootcampCLTNoviembre.Application\BootcampCLTNoviembre.Application.csproj" />
+  </ItemGroup>
+</Project>
